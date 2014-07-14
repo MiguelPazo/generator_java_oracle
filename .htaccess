@@ -1,0 +1,6 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteRule ^$ IndexController.php [NC]
+RewriteRule ^index\.html$ IndexController.php [NC]
+RewriteRule ^page\.html$ PageController.php [NC]
