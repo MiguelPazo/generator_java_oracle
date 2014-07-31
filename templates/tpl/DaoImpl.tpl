@@ -45,7 +45,7 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
     }
     
     @Override
-    public void update(#{$_class}# o#{$_class}#){
+    public boolean update(#{$_class}# o#{$_class}#){
         OracleCallableStatement cmd = null;
         
         try {
@@ -60,7 +60,10 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
         
         } catch (SQLException e) {
             Logger.getLogger(#{$_class}#Dao.class.getName()).log(Level.SEVERE, null, e);
+            return false;
         }
+        
+        return true;
     }
     
     @Override
@@ -105,7 +108,7 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
                 
 #{foreach key=key item=item from=$_fields}#
 #{if $item['typeAttribute'] eq 'DateTime'}#
-                new#{$_class}#.set#{$item['attribute']|ucfirst}#(resultSet.getDate("#{$item['attribute']}#"));
+                new#{$_class}#.set#{$item['attribute']|ucfirst}#((resultSet.getString("#{$item['attribute']}#") == null) ? null : stringToDate(resultSet.getString("#{$item['attribute']}#")));
 #{else if $item['typeAttribute'] eq 'String'}#
                 new#{$_class}#.set#{$item['attribute']|ucfirst}#(resultSet.getString("#{$item['attribute']}#"));
 #{else if $item['typeAttribute'] eq 'Numeric'}#
@@ -144,7 +147,11 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
         
 #{foreach key=key item=item from=$_fields}#
 #{if $item['field'] neq $_primary }#
+#{if $item['typeAttribute'] eq 'DateTime'}#
+        oListParam.add(new ParameterOracle("PI_#{$item['input_field']}#", null, dateToString(o#{$_class}#.get#{$item['attribute']|ucfirst}#()), OracleTypes.CHAR, ParameterDirection.Input));
+#{else}#
         oListParam.add(new ParameterOracle("PI_#{$item['input_field']}#", o#{$_class}#.get#{$item['attribute']|ucfirst}#(), OracleTypes.#{$item['oracleType']}#, ParameterDirection.Input));
+#{/if}#
 #{/if}#
 #{/foreach}#
         
@@ -159,7 +166,11 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
         List<ParameterOracle> oListParam = new ArrayList<>();
             
 #{foreach key=key item=item from=$_fields}#
+#{if $item['typeAttribute'] eq 'DateTime'}#
+        oListParam.add(new ParameterOracle("PI_#{$item['input_field']}#", dateToString(o#{$_class}#.get#{$item['attribute']|ucfirst}#()), OracleTypes.CHAR, ParameterDirection.Input));
+#{else}#
         oListParam.add(new ParameterOracle("PI_#{$item['input_field']}#", o#{$_class}#.get#{$item['attribute']|ucfirst}#(), OracleTypes.#{$item['oracleType']}#, ParameterDirection.Input));
+#{/if}#
 #{/foreach}#              
         
         oListParam.add(new ParameterOracle("PO_RESULTADO", "", OracleTypes.VARCHAR, ParameterDirection.Output));

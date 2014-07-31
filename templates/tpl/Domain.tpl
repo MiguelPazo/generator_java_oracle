@@ -51,4 +51,13 @@ public class #{$_className}# {
 #{/if}#
 
 #{/foreach}#
+#{assign var="toString" value=""}#
+#{foreach key=key item=item from=$_fields}#
+#{assign var="toString" value=$toString|cat:" + "|cat:'"'|cat:", _"|cat: $item['attribute']|cat: " = "|cat:'" + this._'|cat: $item['attribute']}#
+#{/foreach}#
+    @Override
+    public String toString() {
+        return "#{$_className}# {" + "#{$toString|substr:6}# + '}';
+    }
+    
 }

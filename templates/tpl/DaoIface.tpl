@@ -11,7 +11,7 @@ public interface I#{$_class}#Dao {
     
     Integer insert(#{$_class}# o#{$_class}#);
     
-    void update(#{$_class}# o#{$_class}#);
+    boolean update(#{$_class}# o#{$_class}#);
     
     void delete(#{$_class}# o#{$_class}#);
     
