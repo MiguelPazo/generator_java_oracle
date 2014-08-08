@@ -7,10 +7,10 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 putenv ( 'NLS_LANG=american_america.UTF8' );
 
 defined ( 'BASE_URL' ) || define ( 'BASE_URL', '' );
-defined ( 'CONEXION' ) || define ( 'CONEXION', 'pe.com.me.conn' );
-defined ( 'DOMAIN' ) || define ( 'DOMAIN', 'pe.com.me.domain' );
-defined ( 'PACKAGE_DAO' ) || define ( 'PACKAGE_DAO', 'pe.com.me.dao' );
-defined ( 'PACKAGE_SERVICE' ) || define ( 'PACKAGE_SERVICE', 'pe.com.me.service' );
+defined ( 'CONEXION' ) || define ( 'CONEXION', 'pe.gob.onpe.sea.conn' );
+defined ( 'DOMAIN' ) || define ( 'DOMAIN', 'pe.gob.onpe.sea.usb.domain' );
+defined ( 'PACKAGE_DAO' ) || define ( 'PACKAGE_DAO', 'pe.gob.onpe.sea.usb.dao' );
+defined ( 'PACKAGE_SERVICE' ) || define ( 'PACKAGE_SERVICE', 'pe.gob.onpe.sea.usb.service' );
 defined ( 'DOCUMENT_ROOT' ) || define ( 'DOCUMENT_ROOT', realpath ( dirname ( __FILE__ ) . '/../' ) . '/' );
 
 define ( 'DB_SERVER', '(DESCRIPTION=
@@ -24,8 +24,8 @@ define ( 'DB_SERVER', '(DESCRIPTION=
       (SERVICE_NAME=dbde01)
     )
   )' );
-define ( 'DB_USER', 'DB' );
-define ( 'DB_PASS', 'PASS' );
+define ( 'DB_USER', 'SEA' );
+define ( 'DB_PASS', 'SEA' );
 
 set_include_path ( implode ( PATH_SEPARATOR, array (
     realpath ( DOCUMENT_ROOT . '/libs' ),

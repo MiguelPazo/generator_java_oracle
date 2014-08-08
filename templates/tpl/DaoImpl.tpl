@@ -67,7 +67,7 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
     }
     
     @Override
-    public void delete(#{$_class}# o#{$_class}#){
+    public boolean delete(#{$_class}# o#{$_class}#){
         OracleCallableStatement cmd = null;
         
         try {
@@ -79,10 +79,13 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
             oLis = deleteParameters(o#{$_class}#);            
              // execute procedure
             runSP(oLis, ConexionDao.getOracleConnection(), cmd, sp);
+            return false;
             
         } catch (SQLException e) {
             Logger.getLogger(#{$_class}#Dao.class.getName()).log(Level.SEVERE, null, e);
         }
+        
+        return true;
     }
     
     @Override

@@ -51,6 +51,16 @@ public class #{$_className}# {
 #{/if}#
 
 #{/foreach}#
+#{if $_containDate}#
+    public void resetDates() {
+#{foreach key=key item=item from=$_fields}#
+#{if $item['typeAttribute'] eq 'DateTime'}#
+        this._#{$item['attribute']}# = null;
+#{/if}#
+#{/foreach}#
+    }
+    
+#{/if}#
 #{assign var="toString" value=""}#
 #{foreach key=key item=item from=$_fields}#
 #{assign var="toString" value=$toString|cat:" + "|cat:'"'|cat:", _"|cat: $item['attribute']|cat: " = "|cat:'" + this._'|cat: $item['attribute']}#

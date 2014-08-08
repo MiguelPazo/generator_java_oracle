@@ -101,7 +101,7 @@ class Index_Controller extends Controller
                 $fields[] = $field;
             }
 
-            $this->createDomain ( $table, $fields );
+            $this->createDomain ( $table, $fields, $contentDate );
             $compactScriptPackages .= $this->createPackages ( $table, $fields );
 
             $this->createDaoServiceIfaceImp ( $this->getClassFormatName ( $table ), $table, $fields );
