@@ -1,4 +1,5 @@
 package #{$_package_domain}#;
+
 #{if $_containDate}#
 import java.util.Date;
 #{/if}#
@@ -30,7 +31,11 @@ public class #{$_className}# {
     }
 #{else}#
     public String get#{$item['attribute']|ucfirst}#() {
-        return _#{$item['attribute']}#;
+        if (this._#{$item['attribute']}# == null) {
+            return "";
+        } else {
+            return _#{$item['attribute']}#;
+        }
     }
 #{/if}#
 

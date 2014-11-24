@@ -16,12 +16,12 @@ defined ( 'DOCUMENT_ROOT' ) || define ( 'DOCUMENT_ROOT', realpath ( dirname ( __
 define ( 'DB_SERVER', '(DESCRIPTION=
     (ADDRESS=
       (PROTOCOL=TCP)
-      (HOST=192.168.48.240)
-      (PORT=1522)
+      (HOST=192.168.48.52)
+      (PORT=1521)               
     )
     (CONNECT_DATA=
       (SERVER=dedicated)
-      (SERVICE_NAME=dbde01)
+      (SERVICE_NAME=dc3r4t1b)
     )
   )' );
 define ( 'DB_USER', 'SEA' );
