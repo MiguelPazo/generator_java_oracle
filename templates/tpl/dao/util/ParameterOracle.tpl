@@ -2,7 +2,7 @@ package #{$_package_dao}#.common.util;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class ParameterOracle {
 

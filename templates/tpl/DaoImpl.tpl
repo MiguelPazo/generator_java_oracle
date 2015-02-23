@@ -16,7 +16,7 @@ import #{$_package_domain}#.#{$_class}#;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
     

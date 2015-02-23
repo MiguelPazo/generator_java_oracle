@@ -5,7 +5,7 @@ import #{$_package_dao}#.impl.*;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class FactoryDao {
 

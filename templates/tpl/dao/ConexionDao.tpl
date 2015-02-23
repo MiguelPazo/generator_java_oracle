@@ -9,7 +9,7 @@ import #{$_package_dao}#.iface.IConexionDao;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class ConexionDao implements IConexionDao{
 

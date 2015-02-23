@@ -14,7 +14,7 @@ class Index_Controller extends Controller
     protected $_template = 'index.tpl';
     public $_paths = array (
         'scripts' => 'generated/scripts/',
-        'domain' => 'generated/domain/',
+        'domain' => 'generated/model/',
         'dao_factory' => 'generated/dao/',
         'dao_util' => 'generated/dao/',
         'dao_impl' => 'generated/dao/',

@@ -6,35 +6,35 @@ import java.util.Date;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */ 
 public class #{$_className}# {
 
 #{foreach key=key item=item from=$_fields}#
 #{if $item['typeAttribute'] eq 'DateTime'}#
-    private Date _#{$item['attribute']}#;
+    private Date #{$item['attribute']}#;
 #{else if $item['typeAttribute'] eq 'Numeric'}#
-    private int _#{$item['attribute']}#;
+    private int #{$item['attribute']}#;
 #{else}#
-    private String _#{$item['attribute']}#;
+    private String #{$item['attribute']}#;
 #{/if}#
 #{/foreach}#
 
 #{foreach key=key item=item from=$_fields}#
 #{if $item['typeAttribute'] eq 'DateTime'}#
     public Date get#{$item['attribute']|ucfirst}#() {
-        return _#{$item['attribute']}#;
+        return #{$item['attribute']}#;
     }
 #{else if $item['typeAttribute'] eq 'Numeric'}#
     public int get#{$item['attribute']|ucfirst}#() {
-        return _#{$item['attribute']}#;
+        return #{$item['attribute']}#;
     }
 #{else}#
     public String get#{$item['attribute']|ucfirst}#() {
-        if (this._#{$item['attribute']}# == null) {
+        if (this.#{$item['attribute']}# == null) {
             return "";
         } else {
-            return _#{$item['attribute']}#;
+            return #{$item['attribute']}#;
         }
     }
 #{/if}#
@@ -43,15 +43,15 @@ public class #{$_className}# {
 #{foreach key=key item=item from=$_fields}#
 #{if $item['typeAttribute'] eq 'DateTime'}#
     public void set#{$item['attribute']|ucfirst}#(Date #{$item['attribute']}#) {
-        this._#{$item['attribute']}# = #{$item['attribute']}#;
+        this.#{$item['attribute']}# = #{$item['attribute']}#;
     }
 #{else if $item['typeAttribute'] eq 'Numeric'}#
     public void set#{$item['attribute']|ucfirst}#(int #{$item['attribute']}#) {
-        this._#{$item['attribute']}# = #{$item['attribute']}#;
+        this.#{$item['attribute']}# = #{$item['attribute']}#;
     }
 #{else}#
     public void set#{$item['attribute']|ucfirst}#(String #{$item['attribute']}#) {
-        this._#{$item['attribute']}# = #{$item['attribute']}#;
+        this.#{$item['attribute']}# = #{$item['attribute']}#;
     }
 #{/if}#
 
@@ -60,7 +60,7 @@ public class #{$_className}# {
     public void resetDates() {
 #{foreach key=key item=item from=$_fields}#
 #{if $item['typeAttribute'] eq 'DateTime'}#
-        this._#{$item['attribute']}# = null;
+        this.#{$item['attribute']}# = null;
 #{/if}#
 #{/foreach}#
     }
@@ -68,7 +68,7 @@ public class #{$_className}# {
 #{/if}#
 #{assign var="toString" value=""}#
 #{foreach key=key item=item from=$_fields}#
-#{assign var="toString" value=$toString|cat:" + "|cat:'"'|cat:", _"|cat: $item['attribute']|cat: " = "|cat:'" + this._'|cat: $item['attribute']}#
+#{assign var="toString" value=$toString|cat:" + "|cat:'"'|cat:", "|cat: $item['attribute']|cat: " = "|cat:'" + this.'|cat: $item['attribute']}#
 #{/foreach}#
     @Override
     public String toString() {

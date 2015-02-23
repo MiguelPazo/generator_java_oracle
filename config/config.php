@@ -7,25 +7,24 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 putenv ( 'NLS_LANG=american_america.UTF8' );
 
 defined ( 'BASE_URL' ) || define ( 'BASE_URL', '' );
-defined ( 'CONEXION' ) || define ( 'CONEXION', 'pe.gob.onpe.sea.conn' );
-defined ( 'DOMAIN' ) || define ( 'DOMAIN', 'pe.gob.onpe.sea.usb.domain' );
-defined ( 'PACKAGE_DAO' ) || define ( 'PACKAGE_DAO', 'pe.gob.onpe.sea.usb.dao' );
-defined ( 'PACKAGE_SERVICE' ) || define ( 'PACKAGE_SERVICE', 'pe.gob.onpe.sea.usb.service' );
+defined ( 'CONEXION' ) || define ( 'CONEXION', 'pe.gob.onpe.eva.conn' );
+defined ( 'DOMAIN' ) || define ( 'DOMAIN', 'pe.gob.onpe.eva.model' );
+defined ( 'PACKAGE_DAO' ) || define ( 'PACKAGE_DAO', 'pe.gob.onpe.eva.dao' );
+defined ( 'PACKAGE_SERVICE' ) || define ( 'PACKAGE_SERVICE', 'pe.gob.onpe.eva.service' );
 defined ( 'DOCUMENT_ROOT' ) || define ( 'DOCUMENT_ROOT', realpath ( dirname ( __FILE__ ) . '/../' ) . '/' );
 
 define ( 'DB_SERVER', '(DESCRIPTION=
     (ADDRESS=
       (PROTOCOL=TCP)
-      (HOST=192.168.48.52)
-      (PORT=1521)               
+      (HOST=192.168.49.149)
+      (PORT=1521)
     )
     (CONNECT_DATA=
-      (SERVER=dedicated)
-      (SERVICE_NAME=dc3r4t1b)
+      (SERVICE_NAME=BDD3S4)
     )
   )' );
-define ( 'DB_USER', 'SEA' );
-define ( 'DB_PASS', 'SEA' );
+define ( 'DB_USER', 'EVA' );
+define ( 'DB_PASS', 'EVA' );
 
 set_include_path ( implode ( PATH_SEPARATOR, array (
     realpath ( DOCUMENT_ROOT . '/libs' ),

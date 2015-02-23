@@ -5,7 +5,7 @@ import #{$_package_service}#.impl.*;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class FactoryService {
 #{foreach key=key item=item from=$_class}#

@@ -5,7 +5,7 @@ import #{$_package_domain}#.#{$_class}#;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public interface I#{$_class}#Service {
     
