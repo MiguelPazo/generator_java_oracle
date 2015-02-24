@@ -7,10 +7,10 @@ header ( 'Content-Type: text/html; charset=utf-8' );
 putenv ( 'NLS_LANG=american_america.UTF8' );
 
 defined ( 'BASE_URL' ) || define ( 'BASE_URL', '' );
-defined ( 'CONEXION' ) || define ( 'CONEXION', 'pe.miguelpazo.com.conn' );
-defined ( 'DOMAIN' ) || define ( 'DOMAIN', 'pe.miguelpazo.com.model' );
-defined ( 'PACKAGE_DAO' ) || define ( 'PACKAGE_DAO', 'pe.miguelpazo.com.dao' );
-defined ( 'PACKAGE_SERVICE' ) || define ( 'PACKAGE_SERVICE', 'pe.miguelpazo.com.service' );
+defined ( 'CONEXION' ) || define ( 'CONEXION', 'com.miguelpazo.conn' );
+defined ( 'DOMAIN' ) || define ( 'DOMAIN', 'com.miguelpazo.model' );
+defined ( 'PACKAGE_DAO' ) || define ( 'PACKAGE_DAO', 'com.miguelpazo.dao' );
+defined ( 'PACKAGE_SERVICE' ) || define ( 'PACKAGE_SERVICE', 'com.miguelpazo.service' );
 defined ( 'DOCUMENT_ROOT' ) || define ( 'DOCUMENT_ROOT', realpath ( dirname ( __FILE__ ) . '/../' ) . '/' );
 
 define ( 'DB_SERVER', '(DESCRIPTION=
