@@ -153,6 +153,15 @@ PROCEDURE SP_INST_#{$_table}#(#{foreach key=key item=item from=$_fields}#
 #{foreach key=key item=item from=$_fields}#
 
 #{if $item['field'] neq $_primary }#
+#{if $item['typeAudit'] eq true}#
+#{if $item['typeAttribute'] eq 'DateTime'}#
+          STR_QUERY_HEAD   := STR_QUERY_HEAD || '#{$item['field']}#, ';
+          STR_QUERY_VALUES := STR_QUERY_VALUES || 'SYSDATE' || ', ';
+#{else}#
+          STR_QUERY_HEAD   := STR_QUERY_HEAD || '#{$item['field']}#, ';
+          STR_QUERY_VALUES := STR_QUERY_VALUES || '''' || PI_#{$item['input_field']}# || ''', ';
+#{/if}#
+#{else}#
 #{if $item['typeAttribute'] eq 'Numeric'}#
         IF PI_#{$item['input_field']}# IS NOT NULL AND PI_#{$item['input_field']}# <> 0 THEN
 #{else}#
@@ -167,6 +176,7 @@ PROCEDURE SP_INST_#{$_table}#(#{foreach key=key item=item from=$_fields}#
           STR_QUERY_VALUES := STR_QUERY_VALUES || PI_#{$item['input_field']}# || ', ';
 #{/if}#
         END IF;        
+#{/if}#
 #{/if}#
 #{/foreach}#
 

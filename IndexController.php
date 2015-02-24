@@ -29,8 +29,6 @@ class Index_Controller extends Controller
     }
 
     public function indexAction () {
-        $this->getSmarty ()->left_delimiter = '#{';
-        $this->getSmarty ()->right_delimiter = '}#';
         $this->getSmarty ()->assign ( "_package_conexion", CONEXION );
         $this->getSmarty ()->assign ( "_package_domain", DOMAIN );
         $this->getSmarty ()->assign ( "_package_dao", PACKAGE_DAO );
@@ -77,6 +75,7 @@ class Index_Controller extends Controller
 
                 $typePhp = null;
                 $typeOracle = null;
+                $typeAudit = false;
 
                 switch ( $value[ "TYPE" ] ) {
                     case 'DATE':
@@ -95,8 +94,13 @@ class Index_Controller extends Controller
                         break;
                 }
 
+                if ( substr ( $field [ "field" ], 0, 3 ) == "AUD" ) {
+                    $typeAudit = true;
+                }
+
                 $field [ "typeAttribute" ] = $typePhp;
                 $field [ "oracleType" ] = $typeOracle;
+                $field [ "typeAudit" ] = $typeAudit;
 
                 $fields[] = $field;
             }
