@@ -35,6 +35,8 @@ class Index_Controller extends Controller
         $this->getSmarty ()->assign ( "_package_service", PACKAGE_SERVICE );
 
         $this->createFirtDirectories ();
+        $this->createScriptConstraint ();
+        
         $sql_t = "SELECT OBJECT_NAME TABLES FROM ALL_OBJECTS WHERE OBJECT_TYPE = 'TABLE' AND OWNER = '" . DB_USER . "'";
         $result = $this->_db->fetchAll ( $sql_t );
         $sequences = array ();
@@ -115,11 +117,26 @@ class Index_Controller extends Controller
 
         $compactScript .= $this->createSequenceScript ( $sequences ) . $compactScriptPackages;
 
+        $this->createScriptConstraint ();
         $this->createCompactScript ( $compactScript );
         $this->createDaoServiceFactory ( $classFactory );
         $this->createDaoUtil ();
 
         $this->render ();
+    }
+
+    public function createScriptConstraint () {
+        $sql = "SELECT CONSTRAINT_NAME, TABLE_NAME FROM ALL_CONSTRAINTS WHERE OWNER = '" . DB_USER . "' AND CONSTRAINT_NAME LIKE 'CST_%'";
+        $result = $this->_db->fetchAll ( $sql );
+
+        $this->getSmarty ()->assign ( "_data", $result );
+
+        $output = $this->getSmarty ()->fetch ( 'Constraints.tpl' );
+
+        if ( file_put_contents ( $this->_paths[ 'scripts' ] . "CONSTRAINTS.sql", $output ) )
+            echo "Constraints script => Correcto <br/>";
+        else
+            echo "Constraints script => Error <br/>";
     }
 
     public function createDaoUtil () {
@@ -232,12 +249,18 @@ class Index_Controller extends Controller
     public function createSequenceScript ( $sequences ) {
         $this->getSmarty ()->assign ( "_fields", $sequences );
 
-        $output = $this->getSmarty ()->fetch ( 'Script.tpl' );
+        $output = $this->getSmarty ()->fetch ( 'Sequences.tpl' );
+        $outputReset = $this->getSmarty ()->fetch ( 'ResetSequence.tpl' );
 
         if ( file_put_contents ( $this->_paths[ 'scripts' ] . "SEQUENCES.SQL", $output ) )
             echo "Sequence script => Correcto <br/>";
         else
             echo "Sequence script => Error <br/>";
+
+        if ( file_put_contents ( $this->_paths[ 'scripts' ] . "RESET_SEQUENCES.SQL", $outputReset ) )
+            echo "Reset Sequence script => Correcto <br/>";
+        else
+            echo "Reset Sequence script => Error <br/>";
 
         return $output;
     }

@@ -1,0 +1,13 @@
+PROCEDURE SP_DISABLE_CST_FK IS
+  BEGIN
+#{foreach item=item from=$_data}#
+EXECUTE IMMEDIATE 'ALTER TABLE #{$item['TABLE_NAME']}# DISABLE CONSTRAINT #{$item['CONSTRAINT_NAME']}#';
+#{/foreach}#
+END SP_DISABLE_CST_FK;
+
+PROCEDURE SP_ENABLE_CST_FK IS
+  BEGIN
+#{foreach item=item from=$_data}#
+EXECUTE IMMEDIATE 'ALTER TABLE #{$item['TABLE_NAME']}# ENABLE CONSTRAINT #{$item['CONSTRAINT_NAME']}#';
+#{/foreach}#  
+END SP_ENABLE_CST_FK;
