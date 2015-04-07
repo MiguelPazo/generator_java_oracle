@@ -14,7 +14,7 @@ class Index_Controller extends Controller
     protected $_template = 'index.tpl';
     public $_paths = array (
         'scripts' => 'generated/scripts/',
-        'domain' => 'generated/domain/',
+        'domain' => 'generated/model/',
         'dao_factory' => 'generated/dao/',
         'dao_util' => 'generated/dao/',
         'dao_impl' => 'generated/dao/',
@@ -37,6 +37,8 @@ class Index_Controller extends Controller
         $this->getSmarty ()->assign ("_package_service", PACKAGE_SERVICE);
 
         $this->createFirtDirectories ();
+        $this->createScriptConstraint ();
+
         $sql_t = "SELECT OBJECT_NAME TABLES FROM ALL_OBJECTS WHERE OBJECT_TYPE = 'TABLE' AND OWNER = '" . DB_USER . "'";
         $result = $this->_db->fetchAll ($sql_t);
         $sequences = array ();
@@ -80,6 +82,7 @@ class Index_Controller extends Controller
 
                 $typePhp = null;
                 $typeOracle = null;
+                $typeAudit = false;
 
                 switch ( $value[ "TYPE" ] ) {
                     case 'DATE':
@@ -98,8 +101,13 @@ class Index_Controller extends Controller
                         break;
                 }
 
+                if ( substr ($field [ "field" ], 0, 3) == "AUD" ) {
+                    $typeAudit = true;
+                }
+
                 $field [ "typeAttribute" ] = $typePhp;
                 $field [ "oracleType" ] = $typeOracle;
+                $field [ "typeAudit" ] = $typeAudit;
 
                 $fields[] = $field;
             }
@@ -229,6 +237,10 @@ class Index_Controller extends Controller
     }
 
     public function createSequenceScript ( $sequences ) {
+        $sql = "SELECT CONSTRAINT_NAME, TABLE_NAME FROM ALL_CONSTRAINTS WHERE OWNER = '" . DB_USER . "' AND CONSTRAINT_NAME LIKE 'CST_%' ORDER BY CONSTRAINT_NAME";
+        $result = $this->_db->fetchAll ($sql);
+
+        $this->getSmarty ()->assign ("_data", $result);
         $this->getSmarty ()->assign ("_fields", $sequences);
 
         $output = $this->getSmarty ()->fetch ('Sequence.tpl');
@@ -238,7 +250,7 @@ class Index_Controller extends Controller
             echo "Sequence script => Correcto <br/>";
         else
             echo "Sequence script => Error <br/>";
-        
+
         if ( file_put_contents ($this->_paths[ 'scripts' ] . "SEQUENCES_RESET.SQL", $outputReset) )
             echo "Sequence reset script => Correcto <br/>";
         else

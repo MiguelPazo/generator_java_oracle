@@ -83,7 +83,7 @@ public class #{$_class}#Dao extends DBUtil implements I#{$_class}#Dao{
             Logger.getLogger(#{$_class}#Dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
         }
-
+        
         return true;
     }
     

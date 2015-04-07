@@ -76,7 +76,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_#{$_table}# IS
                             ELSE
                                 PI_#{$item['input_field']}# 
                             END
-#{else}##{if $count neq 1}#AND#{/if}# NVL (#{$item['field']}#, 0) = CASE
+#{else}##{if $count neq 1}# AND#{/if}# NVL (#{$item['field']}#, 0) = CASE
                             WHEN PI_#{$item['input_field']}# IS NULL THEN
                                 NVL(#{$item['field']}#,0)
                             WHEN PI_#{$item['input_field']}# = 0 THEN
@@ -84,7 +84,6 @@ CREATE OR REPLACE PACKAGE BODY PKG_#{$_table}# IS
                             ELSE
                                 PI_#{$item['input_field']}# 
                             END#{/if}##{/if}##{if $count eq $_count_fields}#;#{/if}#
-                            
 #{/foreach}#
     EXCEPTION
       WHEN OTHERS THEN
@@ -115,7 +114,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_#{$_table}# IS
 #{assign var="count" value=$count + 1}#
 #{if $item['field'] != $_primary }#
 #{if $item['typeAttribute'] eq 'DateTime'}#
-            #{$item['field']}# = TO_DATE(PI_#{$item['input_field']}#, 'YYYY-MM-DD hh24:mi:ss')#{if $count neq $_count_fields}#,#{/if}#
+            #{$item['field']}# = NVL2 (PI_#{$item['input_field']}#, TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD hh24:mi:ss'),'YYYY-MM-DD hh24:mi:ss'), #{$item['field']}#)#{if $count neq $_count_fields}#,#{/if}#
 #{else}#
             #{$item['field']}# = PI_#{$item['input_field']}##{if $count neq $_count_fields}#,#{/if}#
 #{/if}#
@@ -154,6 +153,15 @@ PROCEDURE SP_INST_#{$_table}#(#{foreach key=key item=item from=$_fields}#
 #{foreach key=key item=item from=$_fields}#
 
 #{if $item['field'] neq $_primary }#
+#{if $item['typeAudit'] eq true}#
+#{if $item['typeAttribute'] eq 'DateTime'}#
+          STR_QUERY_HEAD   := STR_QUERY_HEAD || '#{$item['field']}#, ';
+          STR_QUERY_VALUES := STR_QUERY_VALUES || 'SYSDATE' || ', ';
+#{else}#
+          STR_QUERY_HEAD   := STR_QUERY_HEAD || '#{$item['field']}#, ';
+          STR_QUERY_VALUES := STR_QUERY_VALUES || '''' || PI_#{$item['input_field']}# || ''', ';
+#{/if}#
+#{else}#
 #{if $item['typeAttribute'] eq 'Numeric'}#
         IF PI_#{$item['input_field']}# IS NOT NULL AND PI_#{$item['input_field']}# <> 0 THEN
 #{else}#
@@ -168,6 +176,7 @@ PROCEDURE SP_INST_#{$_table}#(#{foreach key=key item=item from=$_fields}#
           STR_QUERY_VALUES := STR_QUERY_VALUES || PI_#{$item['input_field']}# || ', ';
 #{/if}#
         END IF;        
+#{/if}#
 #{/if}#
 #{/foreach}#
 
