@@ -5,7 +5,7 @@ import oracle.jdbc.OracleResultSet;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class OutParameter {
     private String nomParam;

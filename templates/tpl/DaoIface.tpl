@@ -5,7 +5,7 @@ import #{$_package_domain}#.#{$_class}#;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public interface I#{$_class}#Dao {
     
@@ -13,7 +13,7 @@ public interface I#{$_class}#Dao {
     
     boolean update(#{$_class}# o#{$_class}#);
     
-    void delete(#{$_class}# o#{$_class}#);
+    boolean delete(#{$_class}# o#{$_class}#);
     
     ArrayList<#{$_class}#> fetchAll(#{$_class}# o#{$_class}#);
     

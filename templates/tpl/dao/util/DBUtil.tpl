@@ -14,7 +14,7 @@ import oracle.jdbc.OracleTypes;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public class DBUtil {
 

@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */ 
 public class #{$_className}# {
 

@@ -2,7 +2,7 @@ package #{$_package_dao}#.iface;
 
 /**
  *
- * @author Miguel Pazo
+ * @author Miguel Rodrigo Pazo Sánchez (http://miguelpazo.com/)
  */
 public interface IConexionDao {
     void ConexionOpen();
